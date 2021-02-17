@@ -1,6 +1,5 @@
+import 'package:berry/berry_app/berry_app_theme.dart';
 import 'package:berry/berry_app/models/prize_list_data.dart';
-import 'package:berry/fitness_app/fintness_app_theme.dart';
-import 'package:berry/fitness_app/models/meals_list_data.dart';
 import 'package:berry/main.dart';
 import 'package:flutter/material.dart';
 
@@ -149,11 +148,11 @@ class PrizeView extends StatelessWidget {
                               prizeListData.titleTxt,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontFamily: FitnessAppTheme.fontName,
+                                fontFamily: BerryAppTheme.fontName,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 letterSpacing: 0.2,
-                                color: FitnessAppTheme.white,
+                                color: BerryAppTheme.white,
                               ),
                             ),
                             Expanded(
@@ -167,11 +166,11 @@ class PrizeView extends StatelessWidget {
                                     Text(
                                       prizeListData.prizeDescription,
                                       style: TextStyle(
-                                        fontFamily: FitnessAppTheme.fontName,
+                                        fontFamily: BerryAppTheme.fontName,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 10,
                                         letterSpacing: 0.2,
-                                        color: FitnessAppTheme.white,
+                                        color: BerryAppTheme.white,
                                       ),
                                     ),
                                   ],
@@ -187,11 +186,11 @@ class PrizeView extends StatelessWidget {
                                         prizeListData.value.toString(),
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontFamily: FitnessAppTheme.fontName,
+                                          fontFamily: BerryAppTheme.fontName,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 24,
                                           letterSpacing: 0.2,
-                                          color: FitnessAppTheme.white,
+                                          color: BerryAppTheme.white,
                                         ),
                                       ),
                                       Padding(
@@ -200,12 +199,11 @@ class PrizeView extends StatelessWidget {
                                         child: Text(
                                           'Dollars',
                                           style: TextStyle(
-                                            fontFamily:
-                                                FitnessAppTheme.fontName,
+                                            fontFamily: BerryAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 10,
                                             letterSpacing: 0.2,
-                                            color: FitnessAppTheme.white,
+                                            color: BerryAppTheme.white,
                                           ),
                                         ),
                                       ),
@@ -213,11 +211,11 @@ class PrizeView extends StatelessWidget {
                                   )
                                 : Container(
                                     decoration: BoxDecoration(
-                                      color: FitnessAppTheme.nearlyWhite,
+                                      color: BerryAppTheme.nearlyWhite,
                                       shape: BoxShape.circle,
                                       boxShadow: <BoxShadow>[
                                         BoxShadow(
-                                            color: FitnessAppTheme.nearlyBlack
+                                            color: BerryAppTheme.nearlyBlack
                                                 .withOpacity(0.4),
                                             offset: Offset(8.0, 8.0),
                                             blurRadius: 8.0),
@@ -244,7 +242,7 @@ class PrizeView extends StatelessWidget {
                       width: 84,
                       height: 84,
                       decoration: BoxDecoration(
-                        color: FitnessAppTheme.nearlyWhite.withOpacity(0.2),
+                        color: BerryAppTheme.nearlyWhite.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
                     ),

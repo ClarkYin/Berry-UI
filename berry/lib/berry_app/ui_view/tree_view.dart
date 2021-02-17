@@ -1,35 +1,43 @@
+import 'dart:math';
+
 import 'package:berry/berry_app/berry_app_theme.dart';
-import 'package:berry/main.dart';
 import 'package:flutter/material.dart';
 import 'package:berry/berry_app/models/account_data.dart';
 import 'dart:math' as math;
 
-class TreeView extends StatelessWidget {
-  final AnimationController animationController;
-  final Animation animation;
-  final AccountData accountData;
-  final double bonusWidth = 150;
-
+class TreeView extends StatefulWidget {
   const TreeView({
     Key key,
     this.animationController,
     this.animation,
     this.accountData,
+    this.callback,
   }) : super(key: key);
+  final AnimationController animationController;
+  final Animation animation;
+  final AccountData accountData;
+  final Function(AccountData) callback;
+  final double bonusWidth = 150;
 
+  @override
+  _TreeViewState createState() => _TreeViewState();
+}
+
+class _TreeViewState extends State<TreeView> {
+  Random ranBerries = new Random();
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController,
+      animation: widget.animationController,
       builder: (BuildContext context, Widget child) {
         return FadeTransition(
-          opacity: animation,
+          opacity: widget.animation,
           child: new Transform(
             transform: new Matrix4.translationValues(
-                0.0, 30 * (1.0 - animation.value), 0.0),
+                0.0, 30 * (1.0 - widget.animation.value), 0.0),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 24, right: 24, top: 0, bottom: 18),
+                  left: 24, right: 24, top: 10, bottom: 0),
               child: Container(
                 decoration: BoxDecoration(
                   color: BerryAppTheme.background,
@@ -39,13 +47,28 @@ class TreeView extends StatelessWidget {
                       bottomRight: Radius.circular(8.0),
                       topRight: Radius.circular(68.0)),
                 ),
-                child: Image.asset('assets/berry_app/Mulberry_Bush.png'),
+                child: FlatButton(
+                  color: BerryAppTheme.background,
+                  onPressed: () {
+                    AccountData.accountdata.berries =
+                        AccountData.accountdata.berries +
+                            (ranBerries.nextInt(10) + 5);
+                    widget.callback(AccountData.accountdata);
+                  },
+                  child: Image.asset('assets/berry_app/Mulberry_Bush.png',
+                      height: 430),
+                ),
               ),
             ),
           ),
         );
       },
     );
+  }
+
+  updateBerries() {
+    // AccountData.accountdata.berries = 30;
+    // widget.callback(AccountData.accountdata);
   }
 }
 

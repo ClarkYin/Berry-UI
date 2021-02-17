@@ -278,7 +278,7 @@ class PrizeView extends StatelessWidget {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
-                                            '${(accountData.balance * animation.value).toInt()}',
+                                            '${(accountData.saving * animation.value).toInt()}',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontFamily:

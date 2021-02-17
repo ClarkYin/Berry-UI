@@ -42,243 +42,36 @@ class MainPrizeView extends StatelessWidget {
                 ),
                 child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 16, left: 16, right: 16),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, top: 4),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 4, bottom: 2),
-                                              child: Text(
-                                                'Hi, ${accountData.firstName[0].toUpperCase()}${accountData.firstName.substring(1)}!',
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        BerryAppTheme.fontName,
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 24,
-                                                    letterSpacing: -0.1,
-                                                    color: BerryAppTheme
-                                                        .nearlyWhite),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 24, right: 24, top: 8, bottom: 0),
-                      child: Container(
-                        height: 2,
-                        decoration: BoxDecoration(
-                          color: BerryAppTheme.background,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 16, left: 16, right: 16),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 8, right: 8, top: 50),
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              '${((1.0 - accountData.bonus) * 100).round()}% To Bonus',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontFamily:
-                                                    BerryAppTheme.fontName,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 16,
-                                                letterSpacing: -0.2,
-                                                color:
-                                                    BerryAppTheme.nearlyWhite,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 4),
-                                              child: Container(
-                                                height: 15,
-                                                width: bonusWidth,
-                                                decoration: BoxDecoration(
-                                                  color: HexColor('#EBEEEF')
-                                                      .withOpacity(1),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(4.0)),
-                                                ),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Container(
-                                                      width: (((0.0 +
-                                                                  accountData
-                                                                          .bonus *
-                                                                      (bonusWidth -
-                                                                          0)) /
-                                                              1.0) *
-                                                          animation.value),
-                                                      height: 15,
-                                                      decoration: BoxDecoration(
-                                                        gradient:
-                                                            LinearGradient(
-                                                                colors: [
-                                                              HexColor(
-                                                                  '#00DDA3'),
-                                                              HexColor(
-                                                                      '#00DDA3')
-                                                                  .withOpacity(
-                                                                      0.5),
-                                                            ]),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    4.0)),
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 30, right: 5, top: 0, bottom: 30),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: BerryAppTheme.nearlyWhite,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(24.0))),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 20, bottom: 20),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: EdgeInsets.all(0),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 20),
-                                                  child: Text(
-                                                    'Berries',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        fontFamily:
-                                                            BerryAppTheme
-                                                                .fontName,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        fontSize: 30,
-                                                        letterSpacing: -0.1,
-                                                        color: BerryAppTheme
-                                                            .background),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Align(
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    '${accountData.berryAmt}',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      fontFamily: BerryAppTheme
-                                                          .fontName,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      fontSize: 42,
-                                                      letterSpacing: -0.2,
-                                                      color:
-                                                          BerryAppTheme.accent,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    SizedBox(height: 10),
+                    Center(
+                        child: SizedBox(
+                            child: Text('Monthly Grand Prize',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: BerryAppTheme.fontName,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 28,
+                                  letterSpacing: 1.2,
+                                  color: BerryAppTheme.nearlyWhite,
+                                )))),
+                    SizedBox(height: 30),
+                    Center(
+                        child: SizedBox(
+                            height: 150,
+                            child:
+                                Image.asset('assets/berry_app/moneytree.png'))),
+                    SizedBox(height: 10),
+                    Center(
+                        child: SizedBox(
+                            child: Text('Win 3000 Dollars!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: BerryAppTheme.fontName,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 32,
+                                  letterSpacing: 1.2,
+                                  color: BerryAppTheme.nearlyWhite,
+                                )))),
                   ],
                 ),
               ),

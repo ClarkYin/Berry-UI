@@ -1,10 +1,21 @@
+import 'dart:async';
+
 import 'package:berry/berry_app/berry_app_theme.dart';
 import 'package:berry/main.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:berry/berry_app/models/account_data.dart';
 import 'dart:math' as math;
 
-class AccountInfoView extends StatelessWidget {
+double saving = AccountData.accountdata.saving;
+Timer _savingTimed;
+
+class AccountInfoView extends StatefulWidget {
   final AnimationController animationController;
   final Animation animation;
   final AccountData accountData;
@@ -16,17 +27,53 @@ class AccountInfoView extends StatelessWidget {
     this.animation,
     this.accountData,
   }) : super(key: key);
+  @override
+  _AccountInfoState createState() => _AccountInfoState();
+}
+
+class _AccountInfoState extends State<AccountInfoView> {
+  @override
+  void initState() {
+    //   void savingIncrement() {
+    //     const duration = const Duration(milliseconds: 5);
+    //     _savingTimed = new Timer.periodic(
+    //       duration,
+    //       (Timer timer) {
+    //         if (saving >= 1000000) {
+    //           setState(() {
+    //             timer.cancel();
+    //           });
+    //         } else {
+    //           setState(() {
+    //             saving += 0.001;
+    //           });
+    //         }
+    //       },
+    //     );
+    //   }
+
+    //   savingIncrement();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    saving = AccountData.accountdata.saving;
+    var moneyController = new MoneyMaskedTextController(
+        precision: 4,
+        leftSymbol: '\$',
+        thousandSeparator: ',',
+        decimalSeparator: '.');
+    moneyController.updateValue(saving);
+
     return AnimatedBuilder(
-      animation: animationController,
+      animation: widget.animationController,
       builder: (BuildContext context, Widget child) {
         return FadeTransition(
-          opacity: animation,
+          opacity: widget.animation,
           child: new Transform(
             transform: new Matrix4.translationValues(
-                0.0, 30 * (1.0 - animation.value), 0.0),
+                0.0, 30 * (1.0 - widget.animation.value), 0.0),
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 24, right: 24, top: 16, bottom: 0),
@@ -86,7 +133,7 @@ class AccountInfoView extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '\$2544.292105',
+                                              '${moneyController.text}',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontFamily:
@@ -116,7 +163,7 @@ class AccountInfoView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              '${((1.0 - accountData.bonus) * 100).round()}% To Bonus',
+                                              '${widget.accountData.savingGoal - widget.accountData.saving} To Saving Goal',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 fontFamily:
@@ -133,7 +180,7 @@ class AccountInfoView extends StatelessWidget {
                                                   const EdgeInsets.only(top: 4),
                                               child: Container(
                                                 height: 15,
-                                                width: bonusWidth,
+                                                width: widget.bonusWidth,
                                                 decoration: BoxDecoration(
                                                   color: HexColor('#EBEEEF')
                                                       .withOpacity(1),
@@ -145,21 +192,25 @@ class AccountInfoView extends StatelessWidget {
                                                   children: <Widget>[
                                                     Container(
                                                       width: (((0.0 +
-                                                                  accountData
-                                                                          .bonus *
-                                                                      (bonusWidth -
+                                                                  (widget.accountData
+                                                                              .saving /
+                                                                          widget
+                                                                              .accountData
+                                                                              .savingGoal) *
+                                                                      (widget.bonusWidth -
                                                                           0)) /
                                                               1.0) *
-                                                          animation.value),
+                                                          widget
+                                                              .animation.value),
                                                       height: 15,
                                                       decoration: BoxDecoration(
                                                         gradient:
                                                             LinearGradient(
                                                                 colors: [
                                                               HexColor(
-                                                                  '#00DDA3'),
+                                                                  '00FFFF7146'),
                                                               HexColor(
-                                                                      '#00DDA3')
+                                                                      '00FFFF7146')
                                                                   .withOpacity(
                                                                       0.5),
                                                             ]),
@@ -241,7 +292,7 @@ class AccountInfoView extends StatelessWidget {
                                                 Align(
                                                   alignment: Alignment.center,
                                                   child: Text(
-                                                    '${accountData.berryAmt}',
+                                                    '${widget.accountData.berries}',
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
                                                       fontFamily: BerryAppTheme
@@ -268,6 +319,51 @@ class AccountInfoView extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 1, right: 1, top: 1, bottom: 10),
+                      child: SizedBox(
+                          height: 300,
+                          child: DecoratedBox(
+                            decoration:
+                                BoxDecoration(color: BerryAppTheme.nearlyWhite),
+                            child: Center(
+                                child: Container(
+                                    height: 250,
+                                    child: SfSparkLineChart(
+                                      //Enable the trackball
+                                      trackball: SparkChartTrackball(
+                                          activationMode:
+                                              SparkChartActivationMode.tap),
+                                      //Enable marker
+                                      marker: SparkChartMarker(
+                                          displayMode:
+                                              SparkChartMarkerDisplayMode.all),
+                                      //Enable data label
+                                      labelDisplayMode:
+                                          SparkChartLabelDisplayMode.all,
+                                      data: <double>[
+                                        1,
+                                        5,
+                                        -6,
+                                        0,
+                                        1,
+                                        -2,
+                                        7,
+                                        -7,
+                                        -4,
+                                        -10,
+                                        13,
+                                        -6,
+                                        7,
+                                        5,
+                                        11,
+                                        5,
+                                        3
+                                      ],
+                                    ))),
+                          )),
                     ),
                   ],
                 ),

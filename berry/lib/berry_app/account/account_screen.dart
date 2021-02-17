@@ -3,6 +3,7 @@ import 'package:berry/berry_app/models/account_data.dart';
 import 'package:berry/berry_app/ui_view/generic_rec_view.dart';
 import 'package:berry/berry_app/ui_view/title_view.dart';
 import 'package:berry/berry_app/ui_view/account_info_view.dart';
+import 'package:berry/services/http_service.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatefulWidget {

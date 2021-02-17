@@ -1,5 +1,6 @@
 import 'package:berry/berry_app/berry_app_theme.dart';
 import 'package:berry/berry_app/models/account_data.dart';
+import 'package:berry/berry_app/ui_view/dashboard_full_view.dart';
 import 'package:berry/berry_app/ui_view/dashboard_info_view.dart';
 import 'package:berry/berry_app/ui_view/generic_rec_view.dart';
 import 'package:berry/berry_app/ui_view/title_view.dart';
@@ -23,6 +24,12 @@ class _DashboardScreenState extends State<DashboardScreen>
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
   AccountData accountData = AccountData.accountdata;
+  callback(newAccountData) {
+    setState(() {
+      accountData = newAccountData;
+    });
+  }
+
   @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -60,25 +67,27 @@ class _DashboardScreenState extends State<DashboardScreen>
     const int count = 2;
 
     listViews.add(
-      DashboardInfoView(
+      DashboardFullView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
                 Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
         accountData: accountData,
+        berries: accountData.berries,
       ),
     );
-    listViews.add(
-      TreeView(
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-        accountData: accountData,
-      ),
-    );
+    // listViews.add(
+    //   TreeView(
+    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    //         parent: widget.animationController,
+    //         curve:
+    //             Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+    //     animationController: widget.animationController,
+    //     accountData: accountData,
+    //     callback: callback,
+    //   ),
+    // );
   }
 
   Future<bool> getData() async {

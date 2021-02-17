@@ -1,13 +1,7 @@
-import 'dart:math';
-
 import 'package:berry/berry_app/berry_app_theme.dart';
 import 'package:berry/berry_app/models/account_data.dart';
 import 'package:berry/berry_app/prize/main_prize_view.dart';
 import 'package:berry/berry_app/prize/prize_list_view.dart';
-import 'package:berry/berry_app/ui_view/generic_rec_view.dart';
-import 'package:berry/berry_app/ui_view/title_view.dart';
-import 'package:berry/berry_app/ui_view/account_info_view.dart';
-import 'package:berry/fitness_app/my_diary/meals_list_view.dart';
 import 'package:flutter/material.dart';
 
 class PrizeScreen extends StatefulWidget {
@@ -215,7 +209,7 @@ class _PrizeScreenState extends State<PrizeScreen>
                                     ),
                                   ),
                                   Text(
-                                    '15 May',
+                                    '${accountData.month}',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontFamily: BerryAppTheme.fontName,
