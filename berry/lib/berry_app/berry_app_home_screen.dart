@@ -26,11 +26,11 @@ class _BerryAppHomeScreenState extends State<BerryAppHomeScreen>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    tabIconsList[0].isSelected = true;
+    tabIconsList[1].isSelected = true;
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = PrizeScreen(animationController: animationController);
+    tabBody = DashboardScreen(animationController: animationController);
     super.initState();
   }
 

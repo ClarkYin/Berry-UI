@@ -15,6 +15,12 @@ import 'dart:math' as math;
 double saving = AccountData.accountdata.saving;
 Timer _savingTimed;
 
+class SavingData {
+  SavingData(this.month, this.savingAmt);
+  final String month;
+  final double savingAmt;
+}
+
 class AccountInfoView extends StatefulWidget {
   final AnimationController animationController;
   final Animation animation;
@@ -324,45 +330,42 @@ class _AccountInfoState extends State<AccountInfoView> {
                       padding: const EdgeInsets.only(
                           left: 1, right: 1, top: 1, bottom: 10),
                       child: SizedBox(
-                          height: 300,
+                          height: 270,
                           child: DecoratedBox(
                             decoration:
                                 BoxDecoration(color: BerryAppTheme.nearlyWhite),
                             child: Center(
                                 child: Container(
-                                    height: 250,
-                                    child: SfSparkLineChart(
-                                      //Enable the trackball
-                                      trackball: SparkChartTrackball(
-                                          activationMode:
-                                              SparkChartActivationMode.tap),
-                                      //Enable marker
-                                      marker: SparkChartMarker(
-                                          displayMode:
-                                              SparkChartMarkerDisplayMode.all),
-                                      //Enable data label
-                                      labelDisplayMode:
-                                          SparkChartLabelDisplayMode.all,
-                                      data: <double>[
-                                        1,
-                                        5,
-                                        -6,
-                                        0,
-                                        1,
-                                        -2,
-                                        7,
-                                        -7,
-                                        -4,
-                                        -10,
-                                        13,
-                                        -6,
-                                        7,
-                                        5,
-                                        11,
-                                        5,
-                                        3
+                                    child: SfCartesianChart(
+                                        primaryXAxis: CategoryAxis(),
+                                        // Chart title
+                                        title:
+                                            ChartTitle(text: 'Saving History'),
+                                        // Enable legend
+                                        legend: Legend(isVisible: false),
+                                        // Enable tooltip
+                                        tooltipBehavior:
+                                            TooltipBehavior(enable: true),
+                                        series: <
+                                            LineSeries<SavingData, String>>[
+                                  LineSeries<SavingData, String>(
+                                      dataSource: <SavingData>[
+                                        SavingData('Jan', 0),
+                                        SavingData('Feb', saving - 1000),
+                                        SavingData('Mar', saving - 800),
+                                        SavingData('Apr', saving - 700),
+                                        SavingData('May', saving - 600),
+                                        SavingData('Jun', saving - 300),
+                                        SavingData('Jul', saving),
                                       ],
-                                    ))),
+                                      xValueMapper: (SavingData saving, _) =>
+                                          saving.month,
+                                      yValueMapper: (SavingData saving, _) =>
+                                          saving.savingAmt,
+                                      // Enable data label
+                                      dataLabelSettings:
+                                          DataLabelSettings(isVisible: true))
+                                ]))),
                           )),
                     ),
                   ],
